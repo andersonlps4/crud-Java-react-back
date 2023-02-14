@@ -1,7 +1,7 @@
 package com.anderson.escolas.models;
 
 import java.io.Serializable;
-import java.util.UUID;
+//import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "escola")
+@Table(name = "aluno")
 
-public class Aluno implements Serializable{
+public class AlunoModel implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private UUID ciAluno;
+	private Long ciAluno;
 	@Column(nullable = false, length = 80)
 	private String nmAluno;
 	@Column(nullable = false, unique = true, length = 11)
@@ -37,10 +37,10 @@ public class Aluno implements Serializable{
 	private String nrRm;
 	
 	
-	public UUID getCiAluno() {
+	public Long getCiAluno() {
 		return ciAluno;
 	}
-	public void setCiAluno(UUID ciAluno) {
+	public void setCiAluno(Long ciAluno) {
 		this.ciAluno = ciAluno;
 	}
 	public String getNmAluno() {
