@@ -93,6 +93,7 @@ public class AlunoModel implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	
 	}
 	
 	

@@ -38,4 +38,9 @@ public List<AlunoModel> findAll() {
 public Optional<AlunoModel> findByCiAluno(Long ciAluno) {
 	return alunoRepository.findById(ciAluno);
 }
+@Transactional
+public void delete(AlunoModel alunoModel) {
+	alunoRepository.delete(alunoModel);
+	
+}
 }

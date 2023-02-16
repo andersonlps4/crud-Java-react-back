@@ -12,9 +12,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,7 +67,34 @@ public class AlunoController {
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(alunoModelOptional.get());
 	}
-}
+	
+	@DeleteMapping("/{ciAluno}")
+	public ResponseEntity<Object> deleteAluno(@PathVariable(value = "ciAluno")Long ciAluno){
+		Optional<AlunoModel> alunoModelOptional = alunoService.findByCiAluno(ciAluno);
+		if (!alunoModelOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Codigo não encontrado!");
+		}
+		alunoService.delete(alunoModelOptional.get());
+		return ResponseEntity.status(HttpStatus.OK).body("Aluno deletado com sucesso!");
+	}
+	
+	@PutMapping("/{ciAluno}")
+	public ResponseEntity<Object> updateAluno(@PathVariable(value = "ciAluno")Long ciAluno,
+	@RequestBody @Valid AlunoDto alunoDto){
+		Optional<AlunoModel> alunoModelOptional = alunoService.findByCiAluno(ciAluno);
+		if(!alunoModelOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Codigo não encontrado");
+		}
+		AlunoModel alunoModel = new AlunoModel();
+		BeanUtils.copyProperties(alunoDto, alunoModel);
+		alunoModel.setCiAluno(alunoModelOptional.get().getCiAluno());
+		return ResponseEntity.status(HttpStatus.OK).body(alunoService.save(alunoModel));
+		}
+	}
+
+		
+	
+
 
 
 
