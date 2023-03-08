@@ -29,7 +29,7 @@ public class AlunoModel implements Serializable{
 	private String sexo;
 	@Column(nullable = false, length = 80)
 	private String nmMae;
-	@Column(nullable = false, unique = true, length = 11)
+	@Column(nullable = false, length = 11)
 	private String nrCpfMae;
 	@Column(nullable = false, length = 1)
 	private String flAtivo;

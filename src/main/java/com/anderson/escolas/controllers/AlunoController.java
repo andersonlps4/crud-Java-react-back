@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +28,7 @@ import com.anderson.escolas.services.AlunoService;
 //import com.api.parkingcontrol.models.AlunoModel;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/aluno")
 public class AlunoController {
 	
@@ -37,7 +38,7 @@ public class AlunoController {
 	this.alunoService = alunoService;
 }
 	@PostMapping
-	public ResponseEntity<Object> saveAluno(@RequestBody @Valid AlunoDto alunoDto){
+	public ResponseEntity<Object> saveAluno(@RequestBody AlunoDto alunoDto){
 		if(alunoService.existsByNrCpf(alunoDto.getNrCpf())) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: número de cpf já cadastrado!");
 		}
@@ -68,7 +69,7 @@ public class AlunoController {
 		return ResponseEntity.status(HttpStatus.OK).body(alunoModelOptional.get());
 	}
 	
-	@DeleteMapping("/{ciAluno}")
+	@DeleteMapping(value="/{ciAluno}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> deleteAluno(@PathVariable(value = "ciAluno")Long ciAluno){
 		Optional<AlunoModel> alunoModelOptional = alunoService.findByCiAluno(ciAluno);
 		if (!alunoModelOptional.isPresent()) {

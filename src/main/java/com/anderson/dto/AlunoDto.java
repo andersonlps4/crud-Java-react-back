@@ -5,9 +5,9 @@ import javax.validation.constraints.Size;
 
 public class AlunoDto {
 	
-	@NotBlank
+	
 	private String nmAluno;
-	@NotBlank
+	
 	@Size(max = 11)
 	private String nrCpf;
 	public String getNrCpf() {
@@ -16,18 +16,18 @@ public class AlunoDto {
 	public void setNrCpf(String nrCpf) {
 		this.nrCpf = nrCpf;
 	}
-	@NotBlank
+	
 	private String dtNascimento;
-	@NotBlank
+	
 	private String sexo;
-	@NotBlank
+	
 	private String nmMae;
-	@NotBlank
+	
 	@Size(max = 11)
 	private String nrCpfMae;
-	@NotBlank
+	
 	private String flAtivo;
-	@NotBlank
+	
 	private String nrRm;
 	
 	
